@@ -1,0 +1,28 @@
+{
+  "name": "iobroker-exporter",
+  "version": "1.0.0",
+  "description": "Exports ioBroker objects into Prometheus",
+  "keywords": [
+    "iobroker",
+    "prometheus",
+    "exporter"
+  ],
+  "license": "MIT",
+  "author": "trqb3",
+  "type": "module",
+  "scripts": {
+    "dev": "tsx --watch src/index.js",
+    "build": "tsc",
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "ms": "^2.1.3"
+  },
+  "devDependencies": {
+    "@iobroker/types": "^7.1.0",
+    "@types/ms": "^2.1.0",
+    "@types/node": "^25.2.3",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3"
+  }
+}
