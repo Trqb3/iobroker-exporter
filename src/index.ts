@@ -7,8 +7,8 @@ import { updateMetrics } from './modules/Metrics';
 import { loadObjectMetadata } from "./modules/helper/loadObjectMetadata";
 
 console.log('=====================================');
-console.log('ioBroker REST API Exporter for implec');
-console.log('made by gruber@implec.de')
+console.log('ioBroker REST API Exporter');
+console.log('made by admin@trqb3.dev')
 console.log('=====================================');
 console.log(`ioBroker Host  : ${config.IOBROKER_HOST}`);
 console.log(`REST API Port  : ${config.REST_API_PORT}`);
