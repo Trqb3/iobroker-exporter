@@ -9,7 +9,6 @@
   ],
   "license": "MIT",
   "author": "trqb3",
-  "type": "module",
   "scripts": {
     "dev": "tsx --watch src/index.js",
     "build": "tsc",
