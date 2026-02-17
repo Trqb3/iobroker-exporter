@@ -92,7 +92,7 @@ export function mapToUnifiedMetric(id: string) {
         const deviceName: string = escapeLabel(meta.name || deviceId);
 
         return {
-            metricName: `iobroker_zigbee_${category}${value}`,
+            metricName: sanitizeMetricName(`iobroker_zigbee_${category}${value}`),
             labels: {
                 instance,
                 device_id: deviceId,
@@ -104,7 +104,7 @@ export function mapToUnifiedMetric(id: string) {
     // Pattern: [ADAPTER].[INSTANCE].[kategorie1].[kategorie2]...[value]
     // z.B. backitup.0.info.iobrokerNextTime
     if (p.length >= 3 && /^\d+$/.test(p[1])) {
-        const adapter: string = sanitizeMetricName(p[0]);
+        const adapter: string = p[0];
         const instance: string = p[1];
         const valueParts: string[] = p.slice(2);
         const value: string = valueParts[valueParts.length - 1];
@@ -115,7 +115,7 @@ export function mapToUnifiedMetric(id: string) {
             : '';
 
         return {
-            metricName: `iobroker_${adapter}_${category}${value}`,
+            metricName: sanitizeMetricName(`iobroker_${adapter}_${category}${value}`),
             labels: {
                 adapter,
                 instance,
