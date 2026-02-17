@@ -104,7 +104,7 @@ export function mapToUnifiedMetric(id: string) {
     // Pattern: [ADAPTER].[INSTANCE].[kategorie1].[kategorie2]...[value]
     // z.B. backitup.0.info.iobrokerNextTime
     if (p.length >= 3 && /^\d+$/.test(p[1])) {
-        const adapter: string = p[0];
+        const adapter: string = sanitizeMetricName(p[0]);
         const instance: string = p[1];
         const valueParts: string[] = p.slice(2);
         const value: string = valueParts[valueParts.length - 1];
