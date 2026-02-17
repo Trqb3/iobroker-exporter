@@ -88,8 +88,10 @@ export function mapToUnifiedMetric(id: string) {
             ? cp.join('_') + '_'
             : '';
 
-        const meta = globalStates.objectCache[id] || {};
-        const deviceName: string = escapeLabel(meta.name || deviceId);
+        // Device-Object ID: zigbee.0.0xAABB (ohne State-Teil)
+        const deviceObjectId: string = `${p[0]}.${p[1]}.${p[2]}`;
+        const deviceMeta = globalStates.objectCache[deviceObjectId] || {};
+        const deviceName: string = escapeLabel(deviceMeta.name || deviceId);
 
         return {
             metricName: sanitizeMetricName(`iobroker_zigbee_${category}${value}`),
