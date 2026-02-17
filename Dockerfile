@@ -10,4 +10,4 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm ci --only=production && npm cache clean --force
 COPY --from=builder /app/dist ./dist
-CMD ["node", "dist/server.js"]
+CMD ["node", "dist/index.js"]
