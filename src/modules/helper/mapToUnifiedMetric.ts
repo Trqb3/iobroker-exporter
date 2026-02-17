@@ -95,6 +95,7 @@ export function mapToUnifiedMetric(id: string) {
             metricName: sanitizeMetricName(`iobroker_zigbee_${category}${value}`),
             labels: {
                 instance,
+                id,
                 device_id: deviceId,
                 device_name: deviceName
             }

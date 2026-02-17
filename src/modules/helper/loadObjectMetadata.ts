@@ -13,6 +13,31 @@ export async function loadObjectMetadata(): Promise<void> {
     try {
         const objects: Record<string, ioBroker.Object> = await fetchJSON('/v1/objects?filter=*&type=state');
 
+
+        let zigbeeDevices: Record<string, ioBroker.Object> = {};
+        try {
+            zigbeeDevices = await fetchJSON('/v1/objects?filter=zigbee.*&type=device');
+        } catch (e) {
+            // Keine Zigbee Devices
+        }
+
+        // Zigbee Devices in Cache speichern
+        for (const [id, obj] of Object.entries(zigbeeDevices)) {
+            if (obj?.common?.name) {
+                const name = typeof obj.common.name === 'string'
+                    ? obj.common.name
+                    : obj.common.name?.en || '';
+
+                globalStates.objectCache[id] = {
+                    name: sanitizeLabelValue(name),
+                    location: '',
+                    unit: '',
+                    room: ''
+                };
+            }
+        }
+
+
         for (const [id, obj] of Object.entries(objects)) {
             if (obj && obj.common) {
                 const p: string[] = id.split('.');
