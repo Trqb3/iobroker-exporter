@@ -75,29 +75,6 @@ export function mapToUnifiedMetric(id: string) {
         };
     }
 
-    // Pattern: [ADAPTER].[INSTANCE].[kategorie1].[kategorie2]...[value]
-    // z.B. backitup.0.info.iobrokerNextTime
-    if (p.length >= 3 && /^\d+$/.test(p[1])) {
-        const adapter: string = p[0];
-        const instance: string = p[1];
-        const valueParts: string[] = p.slice(2);
-        const value: string = valueParts[valueParts.length - 1];
-        const categoryParts: string[] = valueParts.slice(0, -1);
-
-        const category: string = categoryParts.length > 0
-            ? categoryParts.join('_') + '_'
-            : '';
-
-        return {
-            metricName: `iobroker_${adapter}_${category}${value}`,
-            labels: {
-                adapter,
-                instance,
-                id
-            }
-        };
-    }
-
     // Pattern: zigbee.[INSTANZ].[GERÄTE_ID].[kategorie1].[kategorie2]...[wert]
     if (p[0] === 'zigbee' && p.length >= 4) {
         const instance: string = p[1];
@@ -123,6 +100,30 @@ export function mapToUnifiedMetric(id: string) {
             }
         };
     }
+
+    // Pattern: [ADAPTER].[INSTANCE].[kategorie1].[kategorie2]...[value]
+    // z.B. backitup.0.info.iobrokerNextTime
+    if (p.length >= 3 && /^\d+$/.test(p[1])) {
+        const adapter: string = p[0];
+        const instance: string = p[1];
+        const valueParts: string[] = p.slice(2);
+        const value: string = valueParts[valueParts.length - 1];
+        const categoryParts: string[] = valueParts.slice(0, -1);
+
+        const category: string = categoryParts.length > 0
+            ? categoryParts.join('_') + '_'
+            : '';
+
+        return {
+            metricName: `iobroker_${adapter}_${category}${value}`,
+            labels: {
+                adapter,
+                instance,
+                id
+            }
+        };
+    }
+
 
     return {
         metricName: sanitizeMetricName(id),

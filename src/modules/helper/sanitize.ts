@@ -26,7 +26,8 @@ export function sanitizeMetricName(name: string): string {
         .replace(/[.\-\s]/g, '_')
         .replace(/[^a-zA-Z0-9_]/g, '')
         .replace(/_+/g, '_')
-        .replace(/^_+|_+$/g, '');
+        .replace(/^_+|_+$/g, '')
+        .replace(/-/g, '_');
 
     if (/^\d/.test(sanitized)) {
         sanitized = 'n' + sanitized;
